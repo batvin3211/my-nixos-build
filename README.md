@@ -10,7 +10,7 @@ The system is really just meant as a trampoline for installing "real" system con
 
 **Warning:** The created USB stick is destructive in the sense that it deletes everything on the disk without asking!
 
-1. Build the ISO image via `nix build git+https://git.ascosilinux.com/vincent/nix-system-iso.git?submodules=1`
+1. Build the ISO image via `nix build`
 2. `dd` the ISO image over a USB stick
 3. Put the USB stick into a machine that is set up to boot via USB
 4. Let the machine boot and wait until it powers off again. (It typically takes ~5 minutes)
@@ -18,7 +18,7 @@ The system is really just meant as a trampoline for installing "real" system con
 
 ## Install in VM for testing
 
-Run `nix build git+https://git.ascosilinux.com/vincent/nix-system-iso.git?submodules=1#install-demo && ./result`
+Run `nix build .#install-demo && ./result`
 
 ## Installation Scheme
 
