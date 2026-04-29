@@ -212,29 +212,6 @@
   system.autoUpgrade.runGarbageCollection = false;
   nix.settings.auto-optimise-store = true;
 
-  systemd.services."auto-update-config" = {
-    script = ''
-      set -eu
-     
-      # Update nixbook configs
-      ${pkgs.git}/bin/git -C /etc/nixos pull --no-rebase
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      Restart = "on-failure";
-      RestartSec = "30s";
-      CPUWeight = "20";
-      IOWeight = "20";
-    };
-
-    after = [
-      "network-online.target"
-      "graphical.target"
-    ];
-    wants = [ "network-online.target" ];
-  };
-
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
      22
