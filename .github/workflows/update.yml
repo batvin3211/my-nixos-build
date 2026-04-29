@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - run: apt install git -y
+      - run: sudo apt install git -y
       - uses: DeterminateSystems/determinate-nix-action@v3
       - uses: DeterminateSystems/update-flake-lock@main
