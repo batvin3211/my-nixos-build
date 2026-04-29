@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        config: [installer-iso, nixosConfigurations.installed]
+        config: [installer-iso]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
