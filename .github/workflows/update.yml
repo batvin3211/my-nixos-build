@@ -1,0 +1,54 @@
+name: "Flake.lock: update Nix dependencies"
+
+on:
+  workflow_dispatch: # allows manual triggering
+  schedule:
+    - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
+
+jobs:
+  update-flake:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v28
+        with:
+          pr-title: "chore: update flake.lock"
+          pr-labels: automated
+          pr-body: |
+            Automated flake dependency update.
+            {{env.GIT_COMMIT_MESSAGE}}
+  check-x86-linux:
+    name: Check x86_64-linux configs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [installer-iso]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Build ${{ matrix.config }} configuration
+        run:
+          nix build .#${{ matrix.config
+          }} --dry-run
+  auto-merge:
+    needs: [check-x86-linux]
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'automated')
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
