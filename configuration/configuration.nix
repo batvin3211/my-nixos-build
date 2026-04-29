@@ -43,7 +43,7 @@
   #services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 
   # Nixos channel
-  #system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
-  system.autoUpgrade.flake = "github:batvin3211/my-nixos-build#installed";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+  #system.autoUpgrade.flake = "github:batvin3211/my-nixos-build#installed";
 
 }
