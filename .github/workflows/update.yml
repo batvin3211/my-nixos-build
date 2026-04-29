@@ -6,11 +6,50 @@ on:
     - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
 
 jobs:
-  nix-flake-update:
+  update-flake:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: actions/checkout@v6
-      - uses: DeterminateSystems/determinate-nix-action@v3
-      - uses: DeterminateSystems/update-flake-lock@main
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v28
         with:
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          pr-title: "chore: update flake.lock"
+          pr-labels: automated
+          pr-body: |
+            Automated flake dependency update.
+            {{env.GIT_COMMIT_MESSAGE}}
+  check-x86-linux:
+    name: Check x86_64-linux configs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [installer-iso, nixosConfigurations.installed]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+      - name: Build ${{ matrix.config }} configuration
+        run:
+          nix build .#${{ matrix.config
+          }}.config.system.build.toplevel --dry-run
+  auto-merge:
+    needs: [check-x86-linux]
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'automated')
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
