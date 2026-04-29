@@ -19,7 +19,6 @@ jobs:
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v28
         with:
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           pr-title: "chore: update flake.lock"
           pr-labels: automated
           pr-body: |
@@ -39,7 +38,7 @@ jobs:
       - name: Build ${{ matrix.config }} configuration
         run:
           nix build .#${{ matrix.config
-          }}.config.system.build.toplevel --dry-run
+          }} --dry-run
   auto-merge:
     needs: [check-x86-linux]
     runs-on: ubuntu-latest
