@@ -1,25 +1,24 @@
-name: Update Flake
+name: "Flake.lock: update Nix dependencies"
+
 on:
+  workflow_dispatch: # allows manual triggering
   schedule:
-    - cron: "0 0 * * *"
-  workflow_dispatch:
+    - cron: '0 0 * * 0' # runs weekly on Sunday at 00:00
+
 jobs:
-  update-flake:
-    runs-on: ubuntu-latest
+  nix-flake-update:
     permissions:
       contents: write
+      id-token: write
+      issues: write
       pull-requests: write
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup Nix
-        uses: ./.github/actions/setup-nix
-      - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v28
+      - uses: actions/checkout@v6
+      - uses: DeterminateSystems/determinate-nix-action@v3
+      - uses: DeterminateSystems/update-flake-lock@main
         with:
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-          pr-title: "chore: update flake.lock"
-          pr-labels: automated
-          pr-body: |
-            Automated flake dependency update.
-            {{env.GIT_COMMIT_MESSAGE}}
+          pr-title: "Update Nix flake inputs" # Title of PR to be created
+          pr-labels: |                  # Labels to be set on the PR
+            dependencies
+            automated
