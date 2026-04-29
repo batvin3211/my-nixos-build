@@ -1,0 +1,21 @@
+{
+    "BraveRewardsDisabled": true,
+    "BraveWalletDisabled": true,
+    "BraveVPNDisabled": 1,
+    "BraveAIChatEnabled": false,
+    "NewTabPageLocation": "https://searx.ascosilinux.com",
+    "DefaultSearchProviderSearchURL": "https://searx.ascosilinux.com/search?q={searchTerms}",
+    "DefaultSearchProviderEnabled": true,
+    "TorDisabled": true,
+    "HighEfficiencyModeEnabled": true,
+    "MemorySaverModeSavings": 1,
+    "PasswordManagerEnabled": false,
+    "DnsOverHttpsMode": "automatic",
+    "ClearBrowsingDataOnExitList": [
+       "browsing_history",
+       "download_history",
+       "cached_images_and_files",
+       "password_signin",
+       "autofill"
+    ]
+}
