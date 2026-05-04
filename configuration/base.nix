@@ -183,7 +183,7 @@
   };
 
   # bluetooth
-  ware.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
 
   # dconf
   programs.dconf.enable = true;
