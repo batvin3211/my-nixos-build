@@ -62,6 +62,9 @@
   environment.cosmic.excludePackages = [ pkgs.cosmic-player ];
   #programs.kdeconnect.enable = true;
 
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
   # Configure keymap in X11
   services.xserver = {
     xkb.layout = "us";
@@ -180,7 +183,7 @@
   };
 
   # bluetooth
-  hardware.bluetooth.enable = true;
+  ware.bluetooth.enable = true;
 
   # dconf
   programs.dconf.enable = true;
