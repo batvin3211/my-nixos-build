@@ -60,7 +60,7 @@
   services.displayManager.cosmic-greeter.enable = true;
   services.desktopManager.cosmic.enable = true;
   environment.cosmic.excludePackages = [ pkgs.cosmic-player ];
-  #programs.kdeconnect.enable = true;
+  programs.kdeconnect.enable = true;
 
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
