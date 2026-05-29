@@ -32,8 +32,6 @@
     #kdePackages.k3b
     #makemkv
     #handbrake
-    # school
-    #cisco-packet-tracer_9
   ];
 
   # Enable the OpenSSH daemon.
@@ -44,6 +42,5 @@
 
   # Nixos channel
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
-  #system.autoUpgrade.flake = "github:batvin3211/my-nixos-build#installed";
 
 }
