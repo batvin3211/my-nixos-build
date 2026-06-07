@@ -34,6 +34,8 @@
     #handbrake
   ];
 
+  #programs.steam.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = false;
 
