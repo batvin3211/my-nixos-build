@@ -6,6 +6,8 @@
 
   boot.loader.systemd-boot.enable = true;
 
+  boot.zfs.forceImportRoot = false;
+
   boot.initrd.kernelModules = [
     "kvm-intel"
     "virtio_balloon"
