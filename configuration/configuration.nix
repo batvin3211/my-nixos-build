@@ -43,6 +43,6 @@
   #services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 
   # Nixos channel
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-26.05";
 
 }
