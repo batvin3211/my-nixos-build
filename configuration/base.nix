@@ -16,7 +16,7 @@
   boot.loader.systemd-boot.netbootxyz.enable = true;
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   programs.appimage = {
     enable = true;
@@ -99,7 +99,7 @@
   users.users.vincent = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" "lp" "audio" "video" "cdrom" "input" "libvirtd" "dialout" ];
+    extraGroups = [ "wheel" "networkmanager" "lp" "audio" "video" "cdrom" "input" "libvirtd" "dialout" "docker" ];
   };
   programs.fish.enable = true;
 
@@ -138,10 +138,11 @@
       quickemu
       quickgui
       # containers
-      podman
-      podman-compose
+      docker
+      docker-compose
       distrobox
       boxbuddy
+      winboat
       # office apps
       libreoffice
       celluloid
@@ -178,14 +179,8 @@
   # podman
   virtualisation.containers.enable = true;
   virtualisation = {
-    podman = {
+    docker = {
       enable = true;
-
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
-
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
@@ -251,7 +246,6 @@
   # This value determines the NixOS release from which the default settings for stateful data, like file locations and database versions on your system were
   # taken. It‘s perfectly fine and recommended to leave this value at the release version of the first install of this system. Before changing this value read
   # the documentation for this option (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
