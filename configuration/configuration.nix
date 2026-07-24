@@ -32,6 +32,7 @@
     #kdePackages.k3b
     #makemkv
     #handbrake
+    #obs-studio
   ];
 
   #programs.steam.enable = true;
