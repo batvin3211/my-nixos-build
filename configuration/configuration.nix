@@ -33,6 +33,8 @@
     #makemkv
     #handbrake
     #obs-studio
+    #redumper
+    #ps3-disc-dumper
   ];
 
   #programs.steam.enable = true;
