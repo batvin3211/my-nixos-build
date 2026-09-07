@@ -35,6 +35,7 @@
     #obs-studio
     #redumper
     #ps3-disc-dumper
+    #tenacity
   ];
 
   #programs.steam.enable = true;
