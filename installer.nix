@@ -53,7 +53,7 @@ in
       ${util-linux}/bin/sfdisk --wipe=always "$dev" <<-END
         label: gpt
 
-        name=BOOT, size=512MiB, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+        name=BOOT, size=1GiB, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
         name=NIXOS
       END
 
