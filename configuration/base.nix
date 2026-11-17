@@ -16,7 +16,7 @@
   boot.loader.systemd-boot.netbootxyz.enable = true;
 
   # kernel
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  #boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   programs.appimage = {
     enable = true;
